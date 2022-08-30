@@ -1,0 +1,24 @@
+import { faker } from '@faker-js/faker';
+import { Mappable } from './CustomMaps';
+
+// Implement mappable sets up a direct dependency between our interface and user
+// Hence, we can see directly the error message in the right place
+export class User implements Mappable{
+    name: string;
+    location: {
+        lat: number;
+        lng: number;
+    };
+    color: string = "red";
+    constructor() {
+       this.name = faker.name.firstName();
+       this.location = {
+        lat: parseFloat(faker.address.latitude()),
+        lng: parseFloat(faker.address.longitude())
+       }
+    }
+
+    markerContent(): string {
+        return `User Name: ${this.name}`;
+    }
+}
